@@ -10,6 +10,7 @@ white = (255, 255, 255)
 
 screen = pygame.display.set_mode((w, h))
 pygame.display.set_caption('Brainrot Clicker')
+color = (0, 0, 255)
 
 
 def main():
@@ -29,6 +30,7 @@ def main():
     multiplier=1
     clock = pygame.time.Clock()
     while run:
+        
         dt = clock.tick(60) / 1000.0  # Convert milliseconds to seconds
         value_1= 10 + buy_1 * bought_multiplier_1
         value_2 = 100 + buy_2 * bought_multiplier_2
@@ -75,6 +77,8 @@ def main():
 
         if buy_3 > 0:
             br += buy_3 * 15 * dt
+
+        screen.fill(color)
 
 
         screen.fill((255, 255, 255))
