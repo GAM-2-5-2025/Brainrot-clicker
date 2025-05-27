@@ -72,7 +72,6 @@ def main():
 
                 if 1400 <= mouse[0] <= 1400 + 150 and 450 <= mouse[1] <= 450 + 40 and br >= value_1:
                     br -= value_1
-                    multiplier += 1
                     buy_1 += 1
 
                 if 1400 <= mouse[0] <= 1400 + 150 and 650 <= mouse[1] <= 650 + 40 and br >= value_3:
@@ -87,7 +86,6 @@ def main():
 
                 if 1400 <= mouse[0] <= 1400 + 150 and 450 <= mouse[1] <= 450 + 40 and buy_1 >= 1:
                     br += s_value1
-                    multiplier -= 1
                     buy_1 -= 1
 
                 if 1400 <= mouse[0] <= 1400 + 150 and 650 <= mouse[1] <= 650 + 40 and buy_3 > 0:
@@ -101,11 +99,13 @@ def main():
 
 
         # Passive income
+        if buy_1 > 0:
+            br += buy_1 * 0.1 * dt
         if buy_2 > 0:
-            br += buy_2 * 0.5 * dt
+            br += buy_2 * 1 * dt
 
         if buy_3 > 0:
-            br += buy_3 * 15 * dt
+            br += buy_3 * 8 * dt
 
 
         screen.fill((255, 255, 255))
@@ -121,12 +121,18 @@ def main():
         myFont2 = pygame.font.SysFont("Comic Sans", 20)
 
         NumLabel = myFont1.render(f"Brainrot: {broj_koji_se_prikazuje_na_ekranu}", 1, black)
-        touch = myFont2.render(f"The Mouse: {multiplier}", 1, white)
-        cursor = myFont2.render(f"The Cursor: {buy_2}", 1, white)
-        skibidi_toilet = myFont2.render(f"The Skibidi: {buy_3}", 1, white)
+        touch = myFont2.render(f"The Cursor: {buy_1}", 1, white)
+        touch_price = myFont2.render(f"Price: {value_1}", 1, white)
+        cursor = myFont2.render(f"The Skibidi: {buy_2}", 1, white)
+        cursor_price = myFont2.render(f"Price: {value_2}", 1, white)
+        skibidi_toilet = myFont2.render(f"The Crocodilo: {buy_3}", 1, white)
+        skibidi_toilet_price = myFont2.render(f"Price: {value_3}", 1, white)
+
+
 
 
         screen.blit(NumLabel, (100, 20))
+
 
 
 
@@ -139,23 +145,23 @@ def main():
             screen.blit(brain, brain_rect)
 
 
-        if 1400 <= mouse[0] <= 1400 + 150 and 450 <= mouse[1] <= 450 + 40:
-            pygame.draw.rect(screen, color_light, [1400, 450, 150, 40])
+        if 1400 <= mouse[0] <= 1400 + 150 and 450 <= mouse[1] <= 450 + 50:
+            pygame.draw.rect(screen, color_light, [1400, 450, 150, 50])
 
         else:
-            pygame.draw.rect(screen, color_dark, [1400, 450, 150, 40])
+            pygame.draw.rect(screen, color_dark, [1400, 450, 150, 50])
 
-        if 1400 <= mouse[0] <= 1400 + 150 and 550 <= mouse[1] <= 550 + 40:
-                pygame.draw.rect(screen, color_light, [1400, 550, 150, 40])
-
-        else:
-            pygame.draw.rect(screen, color_dark, [1400, 550, 150, 40])
-
-        if 1400 <= mouse[0] <= 1400 + 150 and 650 <= mouse[1] <= 650 + 40:
-                pygame.draw.rect(screen, color_light, [1400, 650, 150, 40])
+        if 1400 <= mouse[0] <= 1400 + 150 and 550 <= mouse[1] <= 550 + 50:
+                pygame.draw.rect(screen, color_light, [1400, 550, 150, 50])
 
         else:
-            pygame.draw.rect(screen, color_dark, [1400, 650, 150, 40])
+            pygame.draw.rect(screen, color_dark, [1400, 550, 150, 50])
+
+        if 1400 <= mouse[0] <= 1400 + 150 and 650 <= mouse[1] <= 650 + 50:
+                pygame.draw.rect(screen, color_light, [1400, 650, 150, 50])
+
+        else:
+            pygame.draw.rect(screen, color_dark, [1400, 650, 150, 50])
 
 
 
@@ -163,7 +169,15 @@ def main():
         screen.blit(touch, (1400, 450))
         screen.blit(cursor, (1400, 550))
         screen.blit(skibidi_toilet, (1400, 650))
+        screen.blit(touch_price, (1400, 470))
+        screen.blit(cursor_price, (1400, 570))
+        screen.blit(skibidi_toilet_price, (1400, 670))
 
+        if br < value_1:
+            cursor_no_money = myFont2.render(f"The Cursor: {buy_2}", 1, black)
+            cursor_price_no_money = myFont2.render(f"Price: {value_2}", 1, black)
+            screen.blit(cursor_no_money, (1400, 450))
+            screen.blit(cursor_price_no_money, (1400, 470))
 
         pygame.display.update()
 
