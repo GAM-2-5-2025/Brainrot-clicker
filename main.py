@@ -8,16 +8,34 @@ color_dark = (100, 100, 100)
 black=(0,0,0)
 white = (255, 255, 255)
 image_size = (200, 200)
+image_size_1 = (200, 50)
+window_size = (1600, 900)
 
 
 screen = pygame.display.set_mode((w, h))
 pygame.display.set_caption('Brainrot Clicker')
+
+background = pygame.image.load("background.png").convert_alpha()
+background = pygame.transform.scale(background, window_size)
+
 brain = pygame.image.load('brainrot.png').convert_alpha()
 brain = pygame.transform.scale(brain, image_size)
 brain_hover = pygame.image.load('brainrot_light.png').convert_alpha()
 brain_hover = pygame.transform.scale(brain_hover, image_size)
 brain_rect = brain.get_rect(topleft=(750, 350))
 brain_hover_rect = brain_hover.get_rect(topleft=(750, 350))
+
+button = pygame.image.load('button.png').convert_alpha()
+button_hover = pygame.image.load('button.png').convert_alpha()
+button_rect = brain.get_rect(topleft=(1350, 450))
+button_hover_rect = brain_hover.get_rect(topleft=(1350, 450))
+
+button_rect1 = brain.get_rect(topleft=(1350, 550))
+button_hover_rect1 = brain_hover.get_rect(topleft=(1350, 550))
+
+skibidi_toilet_img = pygame.image.load("skibidi_toilet.png").convert_alpha()
+
+
 
 def main():
     buy_1 = 0
@@ -70,25 +88,25 @@ def main():
                         click_timestamps.append(now)
 
 
-                if 1400 <= mouse[0] <= 1400 + 150 and 450 <= mouse[1] <= 450 + 40 and br >= value_1:
+                if 1350 <= mouse[0] <= 1350 + 200 and 450 <= mouse[1] <= 450 + 50 and br >= value_1:
                     br -= value_1
                     buy_1 += 1
 
-                if 1400 <= mouse[0] <= 1400 + 150 and 650 <= mouse[1] <= 650 + 40 and br >= value_3:
+                if 1400 <= mouse[0] <= 1400 + 150 and 650 <= mouse[1] <= 650 + 50 and br >= value_3:
                     br -= value_3
                     buy_3 += 1
 
-                if 1400 <= mouse[0] <= 1400 + 150 and 550 <= mouse[1] <= 550 + 40 and br >= value_2:
+                if 1400 <= mouse[0] <= 1400 + 150 and 550 <= mouse[1] <= 550 + 50 and br >= value_2:
                     br -= value_2
                     buy_2 += 1
 
             elif ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 3:
 
-                if 1400 <= mouse[0] <= 1400 + 150 and 450 <= mouse[1] <= 450 + 40 and buy_1 >= 1:
+                if 1350 <= mouse[0] <= 1350 + 150 and 450 <= mouse[1] <= 450 + 50 and buy_1 >= 1:
                     br += s_value1
                     buy_1 -= 1
 
-                if 1400 <= mouse[0] <= 1400 + 150 and 650 <= mouse[1] <= 650 + 40 and buy_3 > 0:
+                if 1400 <= mouse[0] <= 1350 + 150 and 650 <= mouse[1] <= 650 + 50 and buy_3 > 0:
                     br += s_value3
                     buy_3 -= 1
 
@@ -107,8 +125,7 @@ def main():
         if buy_3 > 0:
             br += buy_3 * 8 * dt
 
-
-        screen.fill((255, 255, 255))
+        screen.blit(background, (0, 0))
         l=['', 'k', ' million', ' billion', ' trillion', ' quadrillion']
         broj_potencije=(len(str(int(br)))-1)//3
         broj_koji_se_prikazuje_na_ekranu=round(br/(10**(broj_potencije*3)), 1)
@@ -145,17 +162,17 @@ def main():
             screen.blit(brain, brain_rect)
 
 
-        if 1400 <= mouse[0] <= 1400 + 150 and 450 <= mouse[1] <= 450 + 50:
-            pygame.draw.rect(screen, color_light, [1400, 450, 150, 50])
-
+        if brain_rect.collidepoint(mouse):
+            screen.blit(button_hover, button_hover_rect)
         else:
-            pygame.draw.rect(screen, color_dark, [1400, 450, 150, 50])
+            screen.blit(button, button_rect)
 
-        if 1400 <= mouse[0] <= 1400 + 150 and 550 <= mouse[1] <= 550 + 50:
-                pygame.draw.rect(screen, color_light, [1400, 550, 150, 50])
-
+        if brain_rect.collidepoint(mouse):
+            screen.blit(button_hover, button_hover_rect1)
         else:
-            pygame.draw.rect(screen, color_dark, [1400, 550, 150, 50])
+            screen.blit(button, button_rect1)
+
+
 
         if 1400 <= mouse[0] <= 1400 + 150 and 650 <= mouse[1] <= 650 + 50:
                 pygame.draw.rect(screen, color_light, [1400, 650, 150, 50])
@@ -164,7 +181,7 @@ def main():
             pygame.draw.rect(screen, color_dark, [1400, 650, 150, 50])
 
 
-
+        screen.blit(skibidi_toilet_img, (1334, 544))
 
         screen.blit(touch, (1400, 450))
         screen.blit(cursor, (1400, 550))
@@ -174,10 +191,16 @@ def main():
         screen.blit(skibidi_toilet_price, (1400, 670))
 
         if br < value_1:
-            cursor_no_money = myFont2.render(f"The Cursor: {buy_2}", 1, black)
-            cursor_price_no_money = myFont2.render(f"Price: {value_2}", 1, black)
+            cursor_no_money = myFont2.render(f"The Cursor: {buy_1}", 1, black)
+            cursor_price_no_money = myFont2.render(f"Price: {value_1}", 1, black)
             screen.blit(cursor_no_money, (1400, 450))
             screen.blit(cursor_price_no_money, (1400, 470))
+
+        if br < value_2:
+            skibidi_no_money = myFont2.render(f"The Skibidi: {buy_2}", 1, black)
+            skibidi_price_no_money = myFont2.render(f"Price: {value_2}", 1, black)
+            screen.blit(skibidi_no_money, (1400, 550))
+            screen.blit(skibidi_price_no_money, (1400, 570))
 
         pygame.display.update()
 
