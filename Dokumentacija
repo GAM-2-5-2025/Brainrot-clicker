@@ -1,0 +1,60 @@
+ Uvod
+Naziv rada: Brainrot Clicker
+Autor: [Tvoje ime i prezime]
+Škola: [Naziv škole]
+Mentor: [Ime mentora, ako postoji]
+Brainrot Clicker je jednostavna, ali dinamična "idle clicker" igrica izrađena u Pythonu korištenjem Pygame biblioteke. Ideja se razvila iz želje za izradom igre koja kombinira humor, jednostavne mehanike i izazov kroz rastuću ekonomiju klikova i nadogradnji. Igrač klikće na mozak i skuplja poene, koje zatim ulaže u nadogradnje za povećanje prihoda – aktivnog i pasivnog.
+Cilj rada bio je razviti funkcionalan, estetski zanimljiv projekt koji kombinira osnovne elemente objektno orijentiranog programiranja i grafike u stvaranju vlastite igre. Igra je zabavna, ali i tehnički zahtjevna, zbog implementacije brojnih logika u pozadini (ekonomija igre, anti-cheat sustav, upravljanje resursima itd.).
+________________________________________
+Detaljan opis rada
+Osnovna mehanika igre
+•	Igrač klikom na mozak (središnji element ekrana) skuplja “Brainrot” poene.
+•	Na desnoj strani ekrana nalaze se tri nadogradnje:
+o	The Cursor – povećava broj poena po kliku.
+o	The Skibidi – dodaje dodatne poene pasivno (bez klikanja).
+o	The Crocodilo – značajno povećava pasivne prihode.
+Prikaz GUI-a:
+Početni ekran igre:
+(ovdje umetni sliku ekrana – npr. screenshot1.png)
+Klik na mozak:
+(screenshot mozak klikan, prikaz promjene broja poena)
+Kupovina nadogradnje:
+(screenshot kupovine The Cursor, povećanje broja)
+Pasivna zarada:
+(screenshot gdje bez klika raste Brainrot)
+Dodatne značajke
+•	Anti-cheat mehanizam: ograničenje klikova u sekundi (CPS limit).
+•	Hover efekti za vizualni feedback.
+•	Refund opcija: desni klik vraća dio poena prodajom nadogradnje.
+•	Lijepo formatiran prikaz velikih brojeva (k, million, billion...).
+________________________________________
+Tehničke informacije
+Korištene tehnologije
+•	Jezik: Python 3.x
+•	Biblioteka: Pygame
+•	Slike: PNG formati (izrađeni ručno ili preuzeti iz javnih izvora)
+Sistemski zahtjevi
+•	OS: Windows 10+, Linux, macOS
+•	Python 3.8 ili noviji
+•	Instalirana Pygame biblioteka:
+nginx
+Kopiraj kod
+pip install pygame
+Struktura koda
+plaintext
+Kopiraj kod
+Brainrot_Clicker
+├── brainrot_clicker.py         # Glavna skripta s logikom igre
+├── background.png              # Pozadinska slika
+├── brainrot.png                # Slika mozga
+├── brainrot_light.png          # Hover slika mozga
+├── button.png                  # Dugmad
+├── skibidi_toilet.png          # Ikona jedne nadogradnje
+Pokretanje igre
+1.	Instaliraj Pygame:
+Kopiraj kod
+pip install pygame
+2.	Pokreni brainrot_clicker.py:
+Kopiraj kod
+python brainrot_clicker.py
+
